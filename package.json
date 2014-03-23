@@ -1,0 +1,19 @@
+{
+	"name": "Thermorrent",
+	"main": "./html/index.html",
+	"version": "0.0.2",
+	"window": {
+		"toolbar": false
+	},
+	"dependencies": {
+		"peerflix": "0.4.0",
+		"read-torrent": "^0.2.0",
+		"network-address": "0.0.4",
+		"windows-no-runnable": "~0.0.6",
+		"numeral": "^1.5.3"
+	},
+	"devDependencies": {
+		"grunt": "0.4.4",
+		"grunt-node-webkit-builder": "0.1.17"
+	}
+}
