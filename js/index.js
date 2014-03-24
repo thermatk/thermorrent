@@ -1,5 +1,3 @@
-
-
 var fs = require('fs');
 var proc = require('child_process');
 var peerflix = require('peerflix');
@@ -8,27 +6,7 @@ var address = require('network-address');
 var numeral = require('numeral');
 
 function playtest() {
-
-	//debug
-	$("#progress").text("Кто-то кликнул кнопку!");
-
-	var torrent = "./test.torrent";
-	var playport = 8888;
-	var playvlc = true;
-
-	if (/^magnet:/.test(torrent)) {
-		ontorrent(torrent, playport, playvlc);
-	} else {
-		readTorrent(torrent, function(err, torrentparsed) {
-			if (err) {
-				console.error(err.message);
-				process.exit(1);
-			}
-
-			ontorrent(torrentparsed, playport, playvlc);
-		});
-	}
-
+	opentorrent("./test.torrent")
 }
 
 function openfile() {	
@@ -36,14 +14,14 @@ function openfile() {
 	event.initMouseEvent('click');
 	document.getElementById('open').dispatchEvent(event);
 }
+
 document.getElementById('open').addEventListener('change', function (e) {
-	opentest();
+	opentest(document.getElementById('open').value);
 });
-function opentest() {
+
+function opentorrent(torrent) {
 	//debug
 	$("#progress").text("Кто-то кликнул кнопку и выбрал торрент!");
-
-	var torrent = document.getElementById('open').value;
 	var playport = 8888;
 	var playvlc = true;
 
