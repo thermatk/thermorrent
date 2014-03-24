@@ -6,7 +6,7 @@
 		"toolbar": false
 	},
 	"dependencies": {
-		"peerflix": "0.4.0",
+		"peerflix": "0.4.3",
 		"read-torrent": "^0.2.0",
 		"network-address": "0.0.4",
 		"windows-no-runnable": "~0.0.6",
