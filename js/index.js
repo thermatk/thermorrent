@@ -159,7 +159,7 @@ var ontorrent = function(torrent, playport, playvlc) {
 						}
 
 						if (!!key) {
-							var vlcPath = key["(Default)"].value;
+							var vlcPath = ( key['(Default)'] || function(){for (var name in key) if (name[0] === '(') return key[name];}() ) .value;
 							VLC_ARGS = VLC_ARGS.split(' ');
 							VLC_ARGS.unshift(href);
 							proc.execFile(vlcPath, VLC_ARGS);
