@@ -5,10 +5,6 @@ var readTorrent = require('read-torrent');
 var address = require('network-address');
 var numeral = require('numeral');
 
-function playtest() {
-	opentorrent("./test.torrent")
-}
-
 function openfile() {	
 	var event = document.createEvent('MouseEvents');
 	event.initMouseEvent('click');
