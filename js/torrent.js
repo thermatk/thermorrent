@@ -1,5 +1,4 @@
 var fs = require('fs');
-var proc = require('child_process');
 var peerflix = require('peerflix');
 var readTorrent = require('read-torrent');
 var address = require('network-address');
@@ -95,7 +94,6 @@ var ontorrent = function(torrent, playport, playvlc) {
 
 		}, 500);
 
-		var VLC_ARGS = '-q --video-on-top --play-and-exit';
 
 		if (playvlc) {
 			
@@ -121,26 +119,7 @@ var ontorrent = function(torrent, playport, playvlc) {
 				if (now > targetLoaded) {
 		            $("#progress").text("VLC открывается и смотреть можно");
 
-				    if (process.platform === 'win32') {
-						var registry = require('windows-no-runnable').registry;
-						var key;
-						try {
-							key = registry('HKLM/Software/VideoLAN/VLC');
-						} catch (e) {
-							try {
-								key = registry('HKLM/Software/Wow6432Node/VideoLAN/VLC');
-							} catch (e) {}
-						}
-
-						if (!!key) {
-							var vlcPath = ( key['(Default)'] || function(){for (var name in key) if (name[0] === '(') return key[name];}() ) .value;
-							VLC_ARGS = VLC_ARGS.split(' ');
-							VLC_ARGS.unshift(href);
-							proc.execFile(vlcPath, VLC_ARGS);
-						}
-					} else {
-						 proc.exec('vlc '+href+' '+VLC_ARGS+' || /Applications/VLC.app/Contents/MacOS/VLC '+href+' '+VLC_ARGS);
-					}
+				    startvlc(href);
 				} else {
 	            	$("#progress").text("VLC откроется когда скачается 100% первого отрывка: "+percent+"%");
 	            	loadedTimeout = setTimeout(checkLoadingProgress, 500);
@@ -174,7 +153,4 @@ if (argv.list) {
 	else engine.on('ready', onready);
 	return;
 }
-// VLC subtitles
-VLC_ARGS += ' --sub-file=' + subtitle
-
 */
