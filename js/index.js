@@ -12,7 +12,7 @@ function openfile() {
 }
 
 document.getElementById('open').addEventListener('change', function (e) {
-	opentest(document.getElementById('open').value);
+	opentorrent(document.getElementById('open').value);
 });
 
 function opentorrent(torrent) {
@@ -142,7 +142,7 @@ var ontorrent = function(torrent, playport, playvlc) {
 						 proc.exec('vlc '+href+' '+VLC_ARGS+' || /Applications/VLC.app/Contents/MacOS/VLC '+href+' '+VLC_ARGS);
 					}
 				} else {
-	            	$("#progress").text("VLC откроется когда процентов будет 100: "+percent+"%");
+	            	$("#progress").text("VLC откроется когда скачается 100% первого отрывка: "+percent+"%");
 	            	loadedTimeout = setTimeout(checkLoadingProgress, 500);
 				}
 	        };
