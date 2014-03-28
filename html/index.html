@@ -7,11 +7,13 @@
 	<body>
 		<button onclick="opentorrent('./test.torrent');">Хочу смотреть Tears Of Steel по VLC не качая!</button>
 		<br>
-		<button onclick="openfile();">Дайте мне самому выбрать торрент!</button>
+		<button onclick="openfile();">Дайте мне самому выбрать торрент!</button>		
+		<input id="open_torrent" type="file" style="display:none"/>
 		<br>
 		<input type="text" id="open_magnet">
 		<button onclick="openmagnet();">Дайте мне посмотреть по магнитной ссылке!</button>
-		<input id="open_torrent" type="file" style="display:none"/>
+		<br>
+		<button onclick="stopengine();">Выключить</button>
 		<div id="progress">
 			
 		</div>

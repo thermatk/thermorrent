@@ -11,3 +11,7 @@ document.getElementById('open_torrent').addEventListener('change', function (e) 
 function openmagnet() {	
 	opentorrent(document.getElementById('open_magnet').value);
 }
+
+function stopengine() {	
+	runningengine.destroy();
+}
