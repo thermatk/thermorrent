@@ -7,25 +7,32 @@ var numeral = require('numeral');
 function opentorrent(torrent) {
 	//debug
 	$("#progress").text("Кто-то кликнул кнопку и выбрал торрент!");
-	var playport = 8888;
-	var playvlc = true;
+
+	var opts={};
+	opts.playvlc=true;
 
 	if (/^magnet:/.test(torrent)) {
-		ontorrent(torrent, playport, playvlc);
+		ontorrent(torrent, opts);
 	} else {
 		readTorrent(torrent, function(err, torrentparsed) {
 			if (err) {
 				console.error(err.message);
 				process.exit(1);
 			}
-
-			ontorrent(torrentparsed, playport, playvlc);
+			ontorrent(torrentparsed,opts);
 		});
 	}
 
 }
 
-var ontorrent = function(torrent, playport, playvlc) {
+var ontorrent = function(torrent, opts) {
+	
+	if (!opts) {
+		opts = {};	
+	}
+	if (opts.playvlc == undefined) {
+		opts.playvlc = false;
+	}
 	var engine = peerflix(torrent);
 	var hotswaps = 0;
 
@@ -85,7 +92,7 @@ var ontorrent = function(torrent, playport, playvlc) {
 		}, 500);
 
 
-		if (playvlc) {
+		if (opts.playvlc) {
 			
 			var			  
 				// Minimum percentage to open video
@@ -125,8 +132,9 @@ var ontorrent = function(torrent, playport, playvlc) {
 	});
 
 	engine.on('ready', function() {
-		engine.server.listen(playport || 8888);
+		engine.server.listen(opts.port || 8888);
 	});
+	return engine;
 };
 
 /*
