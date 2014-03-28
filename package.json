@@ -1,5 +1,5 @@
 {
-	"name": "Thermorrent",
+	"name": "thermorrent",
 	"main": "./html/index.html",
 	"version": "0.0.2",
 	"window": {

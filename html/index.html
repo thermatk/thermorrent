@@ -8,7 +8,10 @@
 		<button onclick="opentorrent('./test.torrent');">Хочу смотреть Tears Of Steel по VLC не качая!</button>
 		<br>
 		<button onclick="openfile();">Дайте мне самому выбрать торрент!</button>
-		<input id="open" type="file" style="display:none"/>
+		<br>
+		<input type="text" id="open_magnet">
+		<button onclick="openmagnet();">Дайте мне посмотреть по магнитной ссылке!</button>
+		<input id="open_torrent" type="file" style="display:none"/>
 		<div id="progress">
 			
 		</div>
@@ -16,6 +19,7 @@
 			
 		</div>
 		<script src="../js/vendor/jquery-2.1.0.min.js"></script>
+		<script src="../js/index.js"></script>
 		<script src="../js/torrent.js"></script>
 		<script src="../js/player.js"></script>
 	</body>

@@ -1,6 +1,5 @@
 var proc = require('child_process');
 
-
 var VLC_ARGS = '-q --video-on-top --play-and-exit';
 
 function startvlc(href, subtitle) {
