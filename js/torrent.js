@@ -4,7 +4,7 @@ var readTorrent = require('read-torrent');
 var address = require('network-address');
 var numeral = require('numeral');
 
-var runningengine;
+var engine;
 
 function opentorrent(torrent) {
 	//debug
@@ -14,20 +14,16 @@ function opentorrent(torrent) {
 	opts.playvlc=true;
 
 	if (/^magnet:/.test(torrent)) {
-		contextengine(startengine(torrent, opts));
+		startengine(torrent, opts);
 	} else {
 		readTorrent(torrent, function(err, torrentparsed) {
 			if (err) {
 				console.error(err.message);
 				process.exit(1);
 			}
-			contextengine(startengine(torrentparsed,opts));
+			startengine(torrentparsed,opts);
 		});
 	}
-}
-
-function contextengine(newengine) {
-	runningengine = newengine;
 }
 
 var startengine = function(torrent, opts) {
@@ -38,7 +34,7 @@ var startengine = function(torrent, opts) {
 	if (opts.playvlc == undefined) {
 		opts.playvlc = false;
 	}
-	var engine = peerflix(torrent,opts);
+	engine = peerflix(torrent,opts);
 	var hotswaps = 0;
 
 	engine.on('hotswap', function() {
