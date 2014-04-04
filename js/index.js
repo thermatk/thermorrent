@@ -29,7 +29,7 @@ $('#magnetModal').on('shown.bs.modal', function () {
 })
 
 function openmagnet() {
-	$('#magnetModal').modal('hide')
+	$('#magnetModal').modal('hide');
 	opentorrent($("#magnetLink").val());
 }
 
@@ -39,6 +39,12 @@ function stopengine() {
 	engine.destroy();
 }
 
+starter.on("enginestarts", switchChooseLoad);
+
+function switchChooseLoad() {
+	$("#choosesource").hide("fast");
+	$("#loadandplay").show("fast");	
+}
 starter.on('stat', function(data) {
 	$("#progress").text("Начало качаться!");
 	statisticInterval=setInterval(function() {statHandler(data); }, 500);
@@ -98,3 +104,19 @@ function statHandler(data) {
 		}
 	}
 }
+
+/*
+Useful code from peerflix/app.js
+// Listing files
+if (argv.list) {
+	var onready = function() {
+		engine.files.forEach(function(file, i, files) {
+			clivas.line('{3+bold:'+i+'} : {magenta:'+file.name+'}');
+		})
+		process.exit(0);
+	};
+	if (engine.torrent) onready();
+	else engine.on('ready', onready);
+	return;
+}
+*/

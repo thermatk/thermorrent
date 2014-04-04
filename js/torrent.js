@@ -9,6 +9,7 @@ function opentorrent(torrent) {
 	var opts={};
 
 	if (/^magnet:/.test(torrent)) {
+		starter.emit("enginestarts");
 		startengine(torrent, opts);
 	} else {
 		readTorrent(torrent, function(err, torrentparsed) {
@@ -16,6 +17,7 @@ function opentorrent(torrent) {
 				console.error(err.message);
 				process.exit(1);
 			}
+			starter.emit("enginestarts");
 			startengine(torrentparsed,opts);
 		});
 	}
@@ -70,21 +72,4 @@ var startengine = function(torrent, opts) {
 		engine.swarm.removeListener('wire', magnetStat);
 		engine.server.listen(opts.port || 8888);
 	});
-	return engine;
 };
-
-/*
-Useful code from peerflix/app.js
-// Listing files
-if (argv.list) {
-	var onready = function() {
-		engine.files.forEach(function(file, i, files) {
-			clivas.line('{3+bold:'+i+'} : {magenta:'+file.name+'}');
-		})
-		process.exit(0);
-	};
-	if (engine.torrent) onready();
-	else engine.on('ready', onready);
-	return;
-}
-*/
