@@ -95,13 +95,13 @@ function statHandler(data) {
 
 		percent = now / targetLoaded * 100.0;
 		if (now > targetLoaded) {
-			$("#vlcbar").width("100%");
 		    startvlc(data.href);
 			playerStarted = true;
 		    $("#vlccheck").hide("fast");
 		    $("#vlcbutton").show("fast");
+			$("#vlcbar").animate({ width: "100%" },500);		    
 		} else {
-			$("#vlcbar").width(percent+"%");
+			$("#vlcbar").animate({ width: percent+"%" },500);
 		}
 	}
 }
