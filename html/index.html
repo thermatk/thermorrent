@@ -5,8 +5,9 @@
 		<title>Ololo</title>
 	</head>
 	<body>
-		<button onclick="opentorrent('./test.torrent');">Хочу смотреть Tears Of Steel по VLC не качая!</button>
+		<input id="usevlc" type="checkbox" checked = "checked"> Использовать VLC
 		<br>
+		<button onclick="opentorrent('./test.torrent');">Хочу смотреть Tears Of Steel по VLC не качая!</button>
 		<button onclick="openfile();">Дайте мне самому выбрать торрент!</button>		
 		<input id="open_torrent" type="file" style="display:none"/>
 		<br>
