@@ -9,16 +9,18 @@ function startvlc(href, subtitle) {
 	if (process.platform === 'win32') {
 		var registry = require('windows-no-runnable').registry;
 		var key;
-		try {
-			key = registry('HKLM/Software/VideoLAN/VLC');
-		} catch (e) {
+		if (process.arch === 'x64') {
 			try {
 				key = registry('HKLM/Software/Wow6432Node/VideoLAN/VLC');
 			} catch (e) {}
+		} else {
+			try {
+				key = registry('HKLM/Software/VideoLAN/VLC');
+			} catch (err) {}
 		}
 
-		if (!!key) {
-			var vlcPath = ( key['(Default)'] || function(){for (var name in key) if (name[0] === '(') return key[name];}() ) .value;
+		if (key) {
+			var vlcPath = key['InstallDir'].value + path.sep + 'vlc';
 			VLC_ARGS = VLC_ARGS.split(' ');
 			VLC_ARGS.unshift(href);
 			proc.execFile(vlcPath, VLC_ARGS);
