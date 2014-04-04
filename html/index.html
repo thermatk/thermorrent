@@ -19,10 +19,10 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">thermorrent</a>
+					<a class="navbar-brand">thermorrent</a>
 				</div>
 				<div class="navbar-collapse collapse">
-					<ul class="nav navbar-nav">
+					<!--<ul class="nav navbar-nav">
 						<li class="active"><a href="#">Home</a></li>
 						<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
@@ -33,7 +33,7 @@
 							<li><a href="#">Separated link</a></li>
 						</ul>
 						</li>
-					</ul>
+					</ul>-->
 					<div class="nav navbar-nav navbar-right">
 						<button type="button" id="frame-btn-min" class="btn btn-success btn-sm navbar-btn"><span class="glyphicon glyphicon-chevron-down"></span></button>
 						<button type="button" id="frame-btn-close" class="btn btn-danger btn-sm navbar-btn"><span class="glyphicon glyphicon-remove"></span></button>
@@ -42,23 +42,56 @@
 			</div>
 		</div>
 		<!--/.FRAME -->
+		<!--BODY -->
+		<div id="choosesource"class="container">
+			<div class="page-header">
+				<h1 class="text-center">Источник потока:</h1>
+			</div>
+			<div class="row">
+				<div class="col-xs-6">
+					<button class="btn btn-warning btn-large btn-block" onclick="openfile();"><span class="glyphicon glyphicon-open"></span> Файл *.torrent</button>
 
-		<input id="usevlc" type="checkbox" checked = "checked"> Использовать VLC
-		<br>
-		<button onclick="opentorrent('./test.torrent');">Хочу смотреть Tears Of Steel по VLC не качая!</button>
-		<button onclick="openfile();">Дайте мне самому выбрать торрент!</button>		
-		<input id="open_torrent" type="file" style="display:none"/>
-		<br>
-		<input type="text" id="open_magnet">
-		<button onclick="openmagnet();">Дайте мне посмотреть по магнитной ссылке!</button>
-		<br>
-		<button onclick="stopengine();">Выключить</button>
-		<div id="progress">
-			
+					<input id="open_torrent" type="file" style="display:none"/>
+
+				</div>
+				<div class="col-xs-6">
+					<button class="btn btn-warning btn-large btn-block" data-toggle="modal" data-target="#magnetModal"><span class="glyphicon glyphicon-magnet"></span> Магнитная ссылка</button>
+
+					<div class="modal fade" id="magnetModal" tabindex="-1" role="dialog" aria-labelledby="magnetModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="magnetModalLabel">Открыть ссылку</h4>
+								</div>
+								<div class="modal-body">
+									<div class="form-group">
+										<input type="text" id="magnetLink" class="form-control" placeholder="Вставьте магнитную ссылку сюда">
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">Назад</button>
+										<button type="button" class="btn btn-primary" onclick="openmagnet();">Открыть</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div id="progress2">
-			
+		<div id="loadandplay"class="container">
+			<div>
+				<input id="usevlc" type="checkbox" checked = "checked"> Использовать VLC
+				<button onclick="stopengine();">Выключить</button>
+			</div>
+			<div id="progress">
+				
+			</div>
+			<div id="progress2">
+				
+			</div>
 		</div>
+		<!--/.BODY -->
 		<script src="../js/vendor/jquery-2.1.0.min.js"></script>
 		<script src="../bootstrap/js/bootstrap.min.js"></script>
 		<script src="../js/frame.js"></script>

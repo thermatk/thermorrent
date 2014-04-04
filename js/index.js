@@ -18,8 +18,18 @@ document.getElementById('open_torrent').addEventListener('change', function (e) 
 	opentorrent(document.getElementById('open_torrent').value);
 });
 
-function openmagnet() {	
-	opentorrent(document.getElementById('open_magnet').value);
+
+$('#magnetModal').on('show.bs.modal', function () {
+	/* UPSTREAM BUG?
+	var gui = global.window.nwDispatcher.requireNwGui();
+	var clipboard = gui.Clipboard.get();
+	var cliptext = clipboard.get('text');
+	$("#magnetLink").val(cliptext);*/
+})
+
+function openmagnet() {
+	$('#magnetModal').modal('hide')
+	opentorrent($("#magnetLink").val());
 }
 
 function stopengine() {
