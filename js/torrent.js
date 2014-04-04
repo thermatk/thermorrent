@@ -61,8 +61,13 @@ var startengine = function(torrent, opts) {
 	engine.server.once('error', function() {
 		engine.server.listen(0);
 	});
+	if (typeof torrent === 'string' && torrent.indexOf('magnet:') === 0) {
+		magnetStat();
+		engine.swarm.on('wire', magnetStat);
+	}
 
 	engine.on('ready', function() {
+		engine.swarm.removeListener('wire', magnetStat);
 		engine.server.listen(opts.port || 8888);
 	});
 	return engine;
