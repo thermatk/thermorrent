@@ -2,9 +2,11 @@ var proc = require('child_process');
 var path = require('path');
 
 var player;
-var VLC_ARGS = '-q --video-on-top --play-and-exit';
+var VLC_HREF;
 
 function startvlc(href, subtitle) {
+	var VLC_ARGS = '-q --video-on-top --play-and-exit';
+	VLC_HREF = href;
 	if(subtitle) {
 		VLC_ARGS += ' --sub-file=' + subtitle;
 	}

@@ -46,7 +46,6 @@ function switchChooseLoad() {
 	$("#loadandplay").show("fast");	
 }
 starter.on('stat', function(data) {
-	$("#progress").text("Начало качаться!");
 	statisticInterval=setInterval(function() {statHandler(data); }, 500);
 });
 
@@ -96,11 +95,13 @@ function statHandler(data) {
 
 		percent = now / targetLoaded * 100.0;
 		if (now > targetLoaded) {
-            $("#progress").text("VLC открывается и смотреть можно");
+			$("#vlcbar").width("100%");
 		    startvlc(data.href);
 			playerStarted = true;
+		    $("#vlccheck").hide("fast");
+		    $("#vlcbutton").show("fast");
 		} else {
-        	$("#progress").text("VLC откроется когда скачается 100% первого отрывка: "+percent+"%");
+			$("#vlcbar").width(percent+"%");
 		}
 	}
 }
