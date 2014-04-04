@@ -23,7 +23,7 @@ function openmagnet() {
 }
 
 function stopengine() {
-	clearInterval(statisticInterval);		    
+	clearInterval(statisticInterval);
 	playerStarted = false;
 	engine.destroy();
 }

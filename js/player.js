@@ -1,6 +1,7 @@
 var proc = require('child_process');
 var path = require('path');
 
+var player;
 var VLC_ARGS = '-q --video-on-top --play-and-exit';
 
 function startvlc(href, subtitle) {
@@ -24,9 +25,9 @@ function startvlc(href, subtitle) {
 			var vlcPath = key['InstallDir'].value + path.sep + 'vlc';
 			VLC_ARGS = VLC_ARGS.split(' ');
 			VLC_ARGS.unshift(href);
-			proc.execFile(vlcPath, VLC_ARGS);
+			player=proc.execFile(vlcPath, VLC_ARGS);
 		}
 	} else {
-		proc.exec('vlc '+href+' '+VLC_ARGS+' || /Applications/VLC.app/Contents/MacOS/VLC '+href+' '+VLC_ARGS);
+		player=proc.exec('vlc '+href+' '+VLC_ARGS+' || /Applications/VLC.app/Contents/MacOS/VLC '+href+' '+VLC_ARGS);
 	}
 }
