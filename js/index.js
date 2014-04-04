@@ -19,12 +19,13 @@ document.getElementById('open_torrent').addEventListener('change', function (e) 
 });
 
 
-$('#magnetModal').on('show.bs.modal', function () {
+$('#magnetModal').on('shown.bs.modal', function () {
 	/* UPSTREAM BUG?
 	var gui = global.window.nwDispatcher.requireNwGui();
 	var clipboard = gui.Clipboard.get();
 	var cliptext = clipboard.get('text');
 	$("#magnetLink").val(cliptext);*/
+	$("#magnetLink").focus(); 
 })
 
 function openmagnet() {
@@ -42,6 +43,10 @@ starter.on('stat', function(data) {
 	$("#progress").text("Начало качаться!");
 	statisticInterval=setInterval(function() {statHandler(data); }, 500);
 });
+
+function magnetStat() {
+	$("#progress2").text("Получаем метаданные от "+engine.swarm.wires.length+" пиров");
+}
 
 function statHandler(data) {
 	var active = function(wire) {
