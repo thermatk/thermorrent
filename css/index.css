@@ -1,0 +1,12 @@
+body {
+	padding-top: 70px;
+	padding-bottom: 30px;
+}
+button {
+	-webkit-app-region: no-drag;
+}
+
+#frame {
+	-webkit-user-select: none;
+	-webkit-app-region: drag;
+}
