@@ -1,4 +1,5 @@
 var proc = require('child_process');
+var path = require('path');
 
 var VLC_ARGS = '-q --video-on-top --play-and-exit';
 
