@@ -11,7 +11,7 @@ module.exports = function(grunt) {
         linux32: buildPlatforms.linux32,
         linux64: buildPlatforms.linux64
       },
-      src: ['./html/**', './js/**','./css/**','./bootstrap/**', './node_modules/**', '!./node_modules/grunt*/**', './package.json', './test.torrent' ] // Your node-webkit app './**/*'
+      src: ['./html/**', './js/**','./css/**','./bootstrap/**', './node_modules/**', '!./node_modules/grunt*/**', './package.json' ] // Your node-webkit app './**/*'
     },
   });
   grunt.loadNpmTasks('grunt-node-webkit-builder');
