@@ -8,3 +8,7 @@ $('#frame-btn-min').on('click', function () {
 $('#frame-btn-close').on('click', function () {
     win.close();
 });
+
+onload = function() {
+  win.show();
+}

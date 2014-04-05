@@ -9,6 +9,7 @@
 		"min_width": 768,
 		"width": 768,
 		"height": 540,
+		"show": false,
 		"position" : "mouse"
 	},
 	"dependencies": {
