@@ -1,7 +1,7 @@
 {
 	"name": "thermorrent",
 	"main": "./html/index.html",
-	"version": "0.0.2",
+	"version": "0.4",
 	"window": {
 		"frame": false,
 		"toolbar": false,

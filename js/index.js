@@ -34,23 +34,31 @@ function openmagnet() {
 }
 
 function stopengine() {
-	clearInterval(statisticInterval);
-	playerStarted = false;
 	engine.destroy();
+	var gui = global.window.nwDispatcher.requireNwGui();	
+	var win = gui.Window.get();
+	win.reload();
 }
 
 starter.on("enginestarts", switchChooseLoad);
 
 function switchChooseLoad() {
 	$("#choosesource").hide("fast");
-	$("#loadandplay").show("fast");	
+	$("#loadandplay").show("fast");
+
+	$("#frame-btn-stat").text("Стриминг запущен");
+	$("#frame-btn-stat").removeClass("btn-warning").addClass("btn-info");
+	$("#frame-btn-switch").show();
 }
 starter.on('stat', function(data) {
+	$("#magnetstat").hide();
+	$("#stattable").show();
 	statisticInterval=setInterval(function() {statHandler(data); }, 500);
 });
 
 function magnetStat() {
-	$("#progress2").text("Получаем метаданные от "+engine.swarm.wires.length+" пиров");
+	$("#magnetstat").show();
+	$("#magnetstatmeta").text(engine.swarm.wires.length);
 }
 
 function statHandler(data) {
@@ -63,6 +71,9 @@ function statHandler(data) {
 	var unchoked = engine.swarm.wires.filter(active);
 	var runtime = Math.floor((Date.now() - data.started) / 1000); // time running
 
+	var now = swarm.downloaded,
+	total = engine.server.index.length;
+
 	// href - address for player
 	// filename - filename that is streaming
 	// bytes(swarm.downloadSpeed())+'/s' - speed
@@ -70,7 +81,14 @@ function statHandler(data) {
 	// +bytes(swarm.downloaded)+ - downloaded
 	// +bytes(swarm.uploaded)+ - uploaded
 	// +hotswaps+ - hotswaps
-	$("#progress2").text("Ссылка: " + data.href +" Файл: "+data.filename+" Скорость: "+bytes(swarm.downloadSpeed())+'/s'+' Пиры: '+unchoked.length +'/'+wires.length+' Уже скачалось: '+bytes(swarm.downloaded));
+	$("#statalreadydownfile").text(bytes(now));
+	$("#stattotalfile").text(bytes(total));
+	var downpercent = now / total * 100.0;
+	$("#statfilebar").width(downpercent+"%");	
+	$("#stathref").text(data.href);
+	$("#statfilename").text(data.filename);
+	$("#statspeed").text(bytes(swarm.downloadSpeed())+'/с');
+	$("#statpeers").text(unchoked.length +'/'+wires.length);
 	wires.every(function(wire) {
 		var tags = [];
 		if (wire.peerChoking) tags.push('choked');
@@ -84,11 +102,9 @@ function statHandler(data) {
 	// Minimum bytes loaded to open video
 	MIN_SIZE_LOADED = 10 * 1024 * 1024;
 	if (!playerStarted && $("#usevlc").prop("checked")) {
-		var now = swarm.downloaded,
-		total = engine.server.index.length,
 		// There's a minimum size before we start playing the video.
 		// Some movies need quite a few frames to play properly, or else the user gets another (shittier) loading screen on the video player.
-		targetLoadedSize = MIN_SIZE_LOADED > total ? total : MIN_SIZE_LOADED,
+		var targetLoadedSize = MIN_SIZE_LOADED > total ? total : MIN_SIZE_LOADED,
 		targetLoadedPercent = MIN_PERCENTAGE_LOADED * total / 100.0,
 
 		targetLoaded = Math.max(targetLoadedPercent, targetLoadedSize),
@@ -99,9 +115,9 @@ function statHandler(data) {
 			playerStarted = true;
 		    $("#vlccheck").hide("fast");
 		    $("#vlcbutton").show("fast");
-			$("#vlcbar").animate({ width: "100%" },500);		    
+			$("#vlcbar").width("100%");		    
 		} else {
-			$("#vlcbar").animate({ width: percent+"%" },500);
+			$("#vlcbar").width(percent+"%");
 		}
 	}
 }

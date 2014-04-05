@@ -12,5 +12,13 @@ button {
 }
 
 .progress {
-	height: 41px;
+	height: 30px;
+}
+
+.table .progress {
+	margin-bottom: 0px;
+}
+
+#frame-btn-stat {
+	-webkit-app-region: drag;
 }
