@@ -36,8 +36,6 @@ function openmagnet() {
 
 function stopengine() {
 	engine.destroy();
-	var gui = global.window.nwDispatcher.requireNwGui();	
-	var win = gui.Window.get();
 	win.reload();
 }
 
