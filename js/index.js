@@ -6,6 +6,7 @@ var events = require('events');
 
 var statisticInterval;
 var playerStarted=false;
+var enginestarted=false;
 var starter = new events.EventEmitter();
 
 function openfile() {	
@@ -43,6 +44,7 @@ function stopengine() {
 starter.on("enginestarts", switchChooseLoad);
 
 function switchChooseLoad() {
+	enginestarted=true;
 	$("#choosesource").hide("fast");
 	$("#loadandplay").show("fast");
 
