@@ -18,5 +18,15 @@ onload = function() {
 }
 
 gui.App.on('open', function(path) {
-  alert('Opening file: ' + path);
+	gui.App.argv[0]=path.split(" ")[1];
+	gui.Window.open('index.html', {
+		"frame": false,
+		"toolbar": false,
+		"title" : "thermorrent",
+		"min_width": 768,
+		"width": 768,
+		"height": 540,
+		"position" : "mouse",
+		"focus" : true
+	});
 });
