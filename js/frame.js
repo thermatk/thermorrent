@@ -10,5 +10,13 @@ $('#frame-btn-close').on('click', function () {
 });
 
 onload = function() {
-  win.show();
+	if(gui.App.argv[0] && /torrent/.test(gui.App.argv[0])) {
+		opentorrent(gui.App.argv[0]);
+		gui.App.argv[0]="0";
+	}
+  	win.show();
 }
+
+gui.App.on('open', function(path) {
+  alert('Opening file: ' + path);
+});
