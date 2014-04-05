@@ -9,6 +9,16 @@ var playerStarted=false;
 var enginestarted=false;
 var starter = new events.EventEmitter();
 
+document.addEventListener('keyup', function (e) {
+    if (e.keyCode == 'D'.charCodeAt(0) && e.ctrlKey) {
+        debugMode();
+    }
+});
+
+function debugMode() {
+	$("#catalogue").show();
+	win.showDevTools();
+}
 function openfile() {	
 	var event = document.createEvent('MouseEvents');
 	event.initMouseEvent('click');
@@ -18,7 +28,6 @@ function openfile() {
 document.getElementById('open_torrent').addEventListener('change', function (e) {
 	opentorrent(document.getElementById('open_torrent').value);
 });
-
 
 $('#magnetModal').on('shown.bs.modal', function () {
 	/* UPSTREAM BUG?
