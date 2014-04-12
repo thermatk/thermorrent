@@ -9,6 +9,14 @@ var playerStarted=false;
 var enginestarted=false;
 var starter = new events.EventEmitter();
 
+onload = function() {
+	if(gui.App.argv[0] && /torrent/.test(gui.App.argv[0])) {
+		opentorrent(gui.App.argv[0]);
+		gui.App.argv[0]="0";
+	}
+  	win.show();
+}
+
 document.addEventListener('keyup', function (e) {
     if (e.keyCode == 'D'.charCodeAt(0) && e.ctrlKey) {
         debugMode();
