@@ -1,7 +1,7 @@
 {
 	"name": "thermorrent",
 	"main": "./html/index.html",
-	"version": "0.4",
+	"version": "0.4.1beta",
 	"window": {
 		"frame": false,
 		"toolbar": false,
@@ -17,7 +17,10 @@
 		"read-torrent": "^0.2.0",
 		"network-address": "0.0.4",
 		"windows-no-runnable": "~0.0.6",
-		"numeral": "^1.5.3"
+		"numeral": "^1.5.3",
+		"request": "2.34.0",
+		"cheerio": "0.15.0",
+		"iconv-lite": "0.2.11"
 	},
 	"devDependencies": {
 		"grunt": "0.4.4",

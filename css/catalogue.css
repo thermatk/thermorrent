@@ -1,0 +1,27 @@
+/* from rutracker */
+img.smile, img.postImg  { vertical-align: text-bottom; }
+img.postImg        { margin: 2px 2px 0 0; }
+img.postImgAligned { margin: 4px 4px 2px; }
+var.img-left       { float: left; clear: left; }
+var.img-right      { float: right; clear: right; }
+
+
+.post-align, .post-br, .post-hr, var.postImgAligned {
+	display: block;
+}
+.sp-wrap, .post-hr                 { margin: 8px auto; }
+.c-wrap, .q-wrap                   { margin: 8px auto; }
+.c-wrap, .q-wrap, .sp-wrap         { width: 98%; clear: both; }
+.q-wrap .q-wrap, .sp-wrap .sp-wrap { margin: 2px auto 4px; }
+.c-head, .q-head                   { padding: 0 1px; font-size: 11px; color: #444444; }
+
+.c-body, .q, .sp-body      { padding: 2px 6px; }
+.c-head, .q-head, .sp-head { text-align: left !important; }
+
+.post-align { margin: 8px auto; }
+.post-br    { line-height: 12px; }
+.post-b     { font-weight: bold; }
+.post-u     { text-decoration: underline; }
+.post-i     { font-style: italic; }
+.post-s     { text-decoration: line-through; }
+
