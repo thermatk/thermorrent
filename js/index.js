@@ -64,7 +64,7 @@ function switchChooseLoad() {
 	$("#loadandplay").show("fast");
 
 	$("#frame-btn-stat").text("Стриминг запущен");
-	$("#frame-btn-stat").removeClass("btn-warning").addClass("btn-primary");
+	$("#frame-btn-stat").removeClass("btn-default").addClass("btn-warning");
 	$("#frame-btn-switch").show();
 }
 starter.on('stat', function(data) {
