@@ -4,6 +4,8 @@ var iconv = require('iconv-lite');
 var request = require('request');
 var cheerio = require('cheerio');
 var Buffer = require('buffer').Buffer;
+var os = require('os');
+var path = require('path');
 
 var convert = function(body){
     body = iconv.decode(body, 'win1251');
@@ -12,7 +14,7 @@ var convert = function(body){
 }
 
 
-if (localStorage.rutrackerLogin) { //!
+if (localStorage.rutrackerLogin) { //! TODO
 	//inputCreds();
 } else {
 	localStorage.rutrackerLogin = "ENTERYOURS";
@@ -55,7 +57,7 @@ function get_topic(id) {
 		cheer('#topic_main .row1 .sig-sep').remove();
 		
 		cheer("#tor-reged").remove();
-		// TODO screenshots in modal iframe
+		// TODO screenshots in modal iframe, spoilers
 		cheer("a.postLink").replaceWith(function() {
             return cheer("<span />").append(cheer(this).contents());
         });
@@ -66,7 +68,7 @@ function get_topic(id) {
 		if(postedon && postedon !='' && !err){
 			$("#postbody").html(postbody);
 
-			$("#dlbutton").attr("onclick","downtor('"+torlink+"',"+id+")");
+			$("#dlbutton").attr("onclick","get_torrent('"+torlink+"',"+id+")");
 
 			//img.js
 			$('div.post_body').each(function(){ initPost(this) });
@@ -75,7 +77,17 @@ function get_topic(id) {
 		}
 	}); 
 }
-function downtor(url,id) {
-	request({method: 'POST', url:url, headers : { Referer: 'http://rutracker.org/forum/viewtopic.php?t='+id}, jar: cookiejar, form: {'dummy': ""}}).pipe(fs.createWriteStream(id+'.torrent'))
+function get_torrent(url,id) {
+	var TMP = fs.existsSync('/tmp') ? '/tmp' : os.tmpDir();
+	var filepath = path.join(TMP, id+'.torrent');
+	request({method: 'POST', url:url, headers : { Referer: 'http://rutracker.org/forum/viewtopic.php?t='+id}, jar: cookiejar, form: {'dummy': ""}}).
+	on("end",function(){
+		launch_torrent(filepath);
+	}).
+	pipe(fs.createWriteStream(filepath));
 }
-get_topic(4216402);
+function launch_torrent(filepath) {
+	gui.App.argv[0]=filepath;
+	window.location.assign('index.html');
+}
+get_topic(4352736);
