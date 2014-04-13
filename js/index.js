@@ -10,7 +10,7 @@ var enginestarted=false;
 var starter = new events.EventEmitter();
 
 onload = function() {
-	if(gui.App.argv[0] && /torrent/.test(gui.App.argv[0])) {
+	if(gui.App.argv[0] && (/torrent/.test(gui.App.argv[0]) || /^magnet:/.test(gui.App.argv[0]))) {
 		opentorrent(gui.App.argv[0]);
 		gui.App.argv[0]="0";
 	}

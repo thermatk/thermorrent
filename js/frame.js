@@ -10,7 +10,7 @@ $('#frame-btn-close').on('click', function () {
 });
 
 gui.App.on('open', function(path) {
-	/* Why would anyone need it? Buggy
+	/* Why would anyone need it? Buggy TODO modal to ask what to do
 	gui.App.argv[0]=path.split(" ")[1];
 	gui.Window.open('index.html', {
 		"frame": false,
