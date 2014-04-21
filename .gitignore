@@ -17,3 +17,5 @@ node_modules
 nw
 nw.pak
 /build
+/libffmpegsumo.so
+/nwsnapshot
