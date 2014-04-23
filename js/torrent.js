@@ -1,4 +1,3 @@
-var fs = require('fs');
 var peerflix = require('peerflix');
 var readTorrent = require('read-torrent');
 var address = require('network-address');
@@ -42,14 +41,6 @@ var startengine = function(torrent, opts) {
 		return !wire.peerChoking;
 	};
 
-	engine.on('uninterested', function() {
-		engine.swarm.pause();
-	});
-
-	engine.on('interested', function() {
-		engine.swarm.resume();
-	});
-
 	engine.server.on('listening', function() {
 		var href = 'http://'+address()+':'+engine.server.address().port+'/';
 		var filename = engine.server.index.name.split('/').pop().replace(/\{|\}/g, '');
@@ -70,6 +61,5 @@ var startengine = function(torrent, opts) {
 
 	engine.on('ready', function() {
 		engine.swarm.removeListener('wire', magnetStat);
-		engine.server.listen(opts.port || 8888);
 	});
 };
