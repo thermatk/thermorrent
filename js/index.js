@@ -57,6 +57,15 @@ function stopengine() {
 	win.reload();
 }
 
+win.on('close', function() {
+	this.hide();
+	if(enginestarted) {
+		engine.remove();
+		engine.destroy();
+	}
+	this.close(true);
+});
+
 starter.on("enginestarts", switchChooseLoad);
 
 function switchChooseLoad() {
