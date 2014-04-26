@@ -60,10 +60,10 @@ function stopengine() {
 win.on('close', function() {
 	this.hide();
 	if(enginestarted) {
-		engine.remove();
-		engine.destroy();
+		engine.remove(function() {
+			win.close(true);
+ 		});
 	}
-	this.close(true);
 });
 
 starter.on("enginestarts", switchChooseLoad);
