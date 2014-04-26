@@ -52,6 +52,7 @@ function openmagnet() {
 }
 
 function stopengine() {
+	engine.remove();
 	engine.destroy();
 	win.reload();
 }
