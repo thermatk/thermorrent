@@ -63,6 +63,8 @@ win.on('close', function() {
 		engine.remove(function() {
 			win.close(true);
  		});
+	} else {
+		win.close(true);
 	}
 });
 
