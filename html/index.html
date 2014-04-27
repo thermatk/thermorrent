@@ -138,6 +138,24 @@
 				</tbody>
 			</table>
 		</div>
+		<div class="modal fade" id="switchFileModal" tabindex="-1" role="dialog" aria-labelledby="switchFileModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="switchFileModalLabel">Стриминг уже идёт</h4>
+					</div>
+					<div class="modal-body">
+						<p>Открыть другой файл вместо запущенного?</p>
+						<input type="hidden" id="NewPath">						
+					</div>
+					<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Назад</button>
+							<button type="button" class="btn btn-primary" onclick="openother();">Да</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		<!--/.BODY -->
 		<script src="../js/vendor/jquery-2.1.0.min.js"></script>
 		<script src="../bootstrap/js/bootstrap.min.js"></script>

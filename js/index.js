@@ -66,6 +66,25 @@ win.on('close', function() {
 	}
 });
 
+gui.App.on('open', function(path) {
+	if(enginestarted) {
+		$("#NewPath").val(path);
+		$('#switchFileModal').modal('show');
+	} else {
+		gui.App.argv[0]=path.split(" ")[1];
+		win.reload();
+	}
+});
+
+function openother() {
+		if(/^magnet:/.test($("#NewPath").val())) {
+			gui.App.argv[0]=$("#NewPath").val();
+		} else if (/torrent/.test($("#NewPath").val())) {
+			gui.App.argv[0]=$("#NewPath").val().split(" ")[1];			
+		}
+		stopengine();
+}
+
 starter.on("enginestarts", switchChooseLoad);
 
 function switchChooseLoad() {
