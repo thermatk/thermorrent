@@ -71,7 +71,7 @@ win.on('close', function() {
 gui.App.on('open', function(path) {
 	if(enginestarted) {
 		$("#NewPath").val(path);
-		$('#switchFileModal').modal('show');
+		$('#switchTorrentModal').modal('show');
 	} else {
 		gui.App.argv[0]=path.split(" ")[1];
 		win.reload();
