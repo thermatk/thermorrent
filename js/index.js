@@ -3,6 +3,7 @@ var bytes = function(num) {
 	return numeral(num).format('0.0b');
 };
 var events = require('events');
+var address = require('network-address');
 
 var statisticInterval;
 var playerStarted=false;
@@ -100,13 +101,36 @@ function switchChooseLoad() {
 }
 starter.on('stat', function(data) {
 	$("#magnetstat").hide();
-	$("#stattable").show();
+	$("#statswitch").show();
+	if(engine.files.length > 1) {
+		$("#multifilebutton").show();
+	}
 	statisticInterval=setInterval(function() {statHandler(data); }, 500);
 });
 
 function magnetStat() {
 	$("#magnetstat").show();
 	$("#magnetstatmeta").text(engine.swarm.wires.length);
+}
+
+function differentfilemodal() {
+	$('#stattbody').hide();
+	$("#loadandplaymulti").toggle('fast');
+	//TODO sort
+	if(!($('#filelist').children().length)) {
+		engine.files.forEach(function(file, i) {
+			$('#filelist').append('<tr><td>'+file.name+'</td><td>'+bytes(file.length)+'</td><td><button class="btn btn-primary btn-sm" onclick="choosediffile('+i+');">Выбрать</button></td></tr>');
+		});
+	}
+}
+
+function choosediffile(id) {
+	engine.server.index.deselect();
+	engine.swarm.downloaded = 0;
+	engine.files[id].select();
+	engine.server.index = engine.files[id];
+	VLC_HREF='http://'+address()+':'+engine.server.address().port+'/'+id;
+	//$('#switchFileModal').modal('hide');
 }
 
 function statHandler(data) {
@@ -122,8 +146,8 @@ function statHandler(data) {
 	var now = swarm.downloaded,
 	total = engine.server.index.length;
 
-	// href - address for player
-	// filename - filename that is streaming
+	// VLC_HREF - address for player
+	// engine.server.index.name.split('/').pop().replace(/\{|\}/g, '') - filename that is streaming
 	// bytes(swarm.downloadSpeed())+'/s' - speed
 	// +unchoked.length +'/'+wires.length+ - connected/available peers
 	// +bytes(swarm.downloaded)+ - downloaded
@@ -133,8 +157,8 @@ function statHandler(data) {
 	$("#stattotalfile").text(bytes(total));
 	var downpercent = now / total * 100.0;
 	$("#statfilebar").width(downpercent+"%");	
-	$("#stathref").text(data.href);
-	$("#statfilename").text(data.filename);
+	$("#stathref").text(VLC_HREF);
+	$("#statfilename").text(engine.server.index.name.split('/').pop().replace(/\{|\}/g, ''));
 	$("#statspeed").text(bytes(swarm.downloadSpeed())+'/с');
 	$("#statpeers").text(unchoked.length +'/'+wires.length);
 	wires.every(function(wire) {
@@ -159,7 +183,7 @@ function statHandler(data) {
 
 		percent = now / targetLoaded * 100.0;
 		if (now > targetLoaded) {
-		    startvlc(data.href);
+		    startvlc(VLC_HREF);
 			playerStarted = true;
 		    $("#vlccheck").hide("fast");
 		    $("#vlcbutton").show("fast");
@@ -169,19 +193,3 @@ function statHandler(data) {
 		}
 	}
 }
-
-/*
-Useful code from peerflix/app.js
-// Listing files
-if (argv.list) {
-	var onready = function() {
-		engine.files.forEach(function(file, i, files) {
-			clivas.line('{3+bold:'+i+'} : {magenta:'+file.name+'}');
-		})
-		process.exit(0);
-	};
-	if (engine.torrent) onready();
-	else engine.on('ready', onready);
-	return;
-}
-*/

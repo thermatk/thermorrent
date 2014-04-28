@@ -8,7 +8,7 @@
 		"title" : "thermorrent",
 		"min_width": 768,
 		"width": 768,
-		"height": 540,
+		"height": 600,
 		"show": false,
 		"position" : "mouse"
 	},

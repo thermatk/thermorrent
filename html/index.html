@@ -42,13 +42,13 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-6">
-					<button class="btn btn-warning btn-large btn-block" onclick="openfile();"><span class="glyphicon glyphicon-open"></span> Файл *.torrent</button>
+					<button class="btn btn-warning btn-lg btn-block" onclick="openfile();"><span class="glyphicon glyphicon-open"></span> Файл *.torrent</button>
 
 					<input id="open_torrent" type="file" style="display:none"/>
 
 				</div>
 				<div class="col-xs-6">
-					<button class="btn btn-warning btn-large btn-block" data-toggle="modal" data-target="#magnetModal"><span class="glyphicon glyphicon-magnet"></span> Магнитная ссылка</button>
+					<button class="btn btn-warning btn-lg btn-block" data-toggle="modal" data-target="#magnetModal"><span class="glyphicon glyphicon-magnet"></span> Магнитная ссылка</button>
 
 					<div class="modal fade" id="magnetModal" tabindex="-1" role="dialog" aria-labelledby="magnetModalLabel" aria-hidden="true">
 						<div class="modal-dialog">
@@ -74,7 +74,7 @@
 			<div id="catalogue" class="row" style="display: none;">
 				<br>
 				<div class="col-xs-6  col-xs-offset-3">
-					<button class="btn btn-primary btn-large btn-block" onclick="window.location.assign('catalogue.html');"><span class="glyphicon glyphicon-th-list"></span> Каталог rutracker.org</button>
+					<button class="btn btn-primary btn-lg btn-block" onclick="window.location.assign('catalogue.html');"><span class="glyphicon glyphicon-th-list"></span> Каталог rutracker.org</button>
 				</div>
 			</div>
 		</div>
@@ -101,43 +101,62 @@
 			<div class="page-header" id="magnetstat" style="display: none;">
 				<h3 class="text-center">Получаем метаданные от <span id="magnetstatmeta">0</span> пиров</h3>
 			</div>			
-			<table class="table table-hover text-center" id="stattable" style="display: none;">
-				<tbody id="statswitch">
-				<tr>
-					<td colspan="2">
-						<button type="button" class="btn btn-info" onclick="$('#stattbody').toggle('fast');">Дополнительная информация</button>
-					</td>
-				</tr>
-				</tbody>
-				<tbody id="stattbody" style="display: none;">
-				<tr>
-					<td>Скачано <span id="statalreadydownfile">0 MB</span> из <span id="stattotalfile">0 MB</span></td>
-					<td>
-						<div class="progress progress-striped active">
-							<div class="progress-bar progress progress-bar-success" id="statfilebar"  role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
-							</div>
-						</div>						
-					</td>
-				</tr>
-				<tr>
-					<td>Ссылка для плеера</td>
-					<td id="stathref">Загружается</td>
-				</tr>
-				<tr>
-					<td>Имя файла</td>
-					<td id="statfilename">Загружается</td>
-				</tr>
-				<tr>
-					<td>Скорость</td>
-					<td id="statspeed">0 б/с</td>
-				</tr>
-				<tr>
-					<td>Пиры</td>
-					<td id="statpeers">0/0</td>
-				</tr>
-				</tbody>
-			</table>
-		</div>
+			<div id="controlbuttons" class="row">
+				<div class="col-xs-6">
+					<button class="btn btn-primary btn-lg btn-block" style="display: none;" id="multifilebutton" onclick="differentfilemodal();"><span class="glyphicon glyphicon-th-list"></span> Выбрать файл</button>
+				</div>
+				<div class="col-xs-6" id="statswitch" style="display: none;">					
+					<button class="btn btn-info btn-lg btn-block" onclick="$('#loadandplaymulti').hide();$('#stattbody').toggle('fast');">Дополнительная информация</button>
+				</div>
+			</div>	
+			<div class="row">
+				<table class="table table-hover table-condensed text-center" id="stattable">
+					<tbody id="stattbody" style="display: none;">
+					<tr>
+						<td>Скачано <span id="statalreadydownfile">0 MB</span> из <span id="stattotalfile">0 MB</span></td>
+						<td>
+							<div class="progress progress-striped active">
+								<div class="progress-bar progress progress-bar-success" id="statfilebar"  role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+								</div>
+							</div>						
+						</td>
+					</tr>
+					<tr>
+						<td>Ссылка для плеера</td>
+						<td id="stathref">Загружается</td>
+					</tr>
+					<tr>
+						<td>Имя файла</td>
+						<td id="statfilename">Загружается</td>
+					</tr>
+					<tr>
+						<td>Скорость</td>
+						<td id="statspeed">0 б/с</td>
+					</tr>
+					<tr>
+						<td>Пиры</td>
+						<td id="statpeers">0/0</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+			<div id="loadandplaymulti" style="display: none;" class="row">	
+				<h4 class="text-center">Выберите файл:</h1>
+				<div style="height:300px; overflow:auto;">
+					<table class="table table-condensed table-striped table-hover">
+						<thead>
+							<tr>
+								<th>Имя файла</th>
+								<th>Размер</th>
+								<th>Выбрать</th>
+							</tr>
+						</thead>
+						<tbody id="filelist">
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>		
 		<div class="modal fade" id="switchTorrentModal" tabindex="-1" role="dialog" aria-labelledby="switchTorrentModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">

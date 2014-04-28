@@ -42,12 +42,11 @@ var startengine = function(torrent, opts) {
 	};
 
 	engine.server.on('listening', function() {
-		var href = 'http://'+address()+':'+engine.server.address().port+'/';
-		var filename = engine.server.index.name.split('/').pop().replace(/\{|\}/g, '');
+		VLC_HREF='http://'+address()+':'+engine.server.address().port+'/';
       
       	var started = Date.now(), loadedTimeout;
 
-		var data={href: href, filename: filename, started: started};
+		var data={started: started};
 		starter.emit("stat", data);
 	});
 
