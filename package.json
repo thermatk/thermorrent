@@ -1,7 +1,7 @@
 {
 	"name": "thermorrent",
 	"main": "./html/index.html",
-	"version": "0.4.1beta",
+	"version": "0.5.0beta",
 	"window": {
 		"frame": false,
 		"toolbar": false,
@@ -13,7 +13,7 @@
 		"position" : "mouse"
 	},
 	"dependencies": {
-		"peerflix": "0.8.3",
+		"peerflix": "^0.8.6",
 		"read-torrent": "^0.2.0",
 		"network-address": "0.0.4",
 		"windows-no-runnable": "~0.0.6",
