@@ -53,9 +53,10 @@ function openmagnet() {
 }
 
 function stopengine() {
-	engine.remove();
-	engine.destroy();
-	win.reload();
+	engine.remove(function() {
+		engine.destroy();
+		win.reload();
+ 	});
 }
 
 win.on('close', function() {
@@ -80,11 +81,7 @@ gui.App.on('open', function(path) {
 });
 
 function openother() {
-		if(/^magnet:/.test($("#NewPath").val())) {
-			gui.App.argv[0]=$("#NewPath").val();
-		} else if (/torrent/.test($("#NewPath").val())) {
-			gui.App.argv[0]=$("#NewPath").val().split(" ")[1];			
-		}
+		gui.App.argv[0]=$("#NewPath").val().split(" ")[1];
 		stopengine();
 }
 
