@@ -19,3 +19,4 @@ nw.pak
 /build
 /libffmpegsumo.so
 /nwsnapshot
+/cache
