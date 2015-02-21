@@ -96,9 +96,6 @@
 				<h3 class="text-center">Получаем метаданные от <span id="magnetstatmeta">0</span> пиров</h3>
 			</div>			
 			<div id="controlbuttons" class="row">
-				<div class="col-xs-6">
-					<button class="btn btn-primary btn-lg btn-block" style="display: none;" id="multifilebutton" onclick="differentfilemodal();"><span class="glyphicon glyphicon-th-list"></span> Выбрать файл</button>
-				</div>
 				<div class="col-xs-6" id="statswitch" style="display: none;">					
 					<button class="btn btn-info btn-lg btn-block" onclick="$('#loadandplaymulti').hide();$('#stattbody').toggle('fast');">Дополнительная информация</button>
 				</div>
@@ -133,22 +130,6 @@
 					</tr>
 					</tbody>
 				</table>
-			</div>
-			<div id="loadandplaymulti" style="display: none;" class="row">	
-				<h4 class="text-center">Выберите файл:</h1>
-				<div style="height:300px; overflow:auto;">
-					<table class="table table-condensed table-striped table-hover">
-						<thead>
-							<tr>
-								<th>Имя файла</th>
-								<th>Размер</th>
-								<th>Выбрать</th>
-							</tr>
-						</thead>
-						<tbody id="filelist">
-						</tbody>
-					</table>
-				</div>
 			</div>
 		</div>		
 		<div class="modal fade" id="switchTorrentModal" tabindex="-1" role="dialog" aria-labelledby="switchTorrentModalLabel" aria-hidden="true">

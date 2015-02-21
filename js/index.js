@@ -101,7 +101,6 @@ starter.on('stat', function(data) {
 	$("#statswitch").show();
 	if(!sorted && engine.files.length > 1) {
 		sorted = true;
-		//$("#multifilebutton").show();
 		if (engine.files[1].length / engine.files[0].length > 0.5) {
 			engine.files.sort( function(a, b) 
 			{
@@ -124,27 +123,6 @@ starter.on('stat', function(data) {
 function magnetStat() {
 	$("#magnetstat").show();
 	$("#magnetstatmeta").text(engine.swarm.wires.length);
-}
-
-function differentfilemodal() {
-	$('#stattbody').hide();
-	$("#loadandplaymulti").toggle('fast');
-	//TODO sort
-	if(!($('#filelist').children().length)) {
-		engine.files.forEach(function(file, i) {
-			$('#filelist').append('<tr><td>'+file.name+'</td><td>'+bytes(file.length)+'</td><td><button class="btn btn-primary btn-sm" onclick="choosediffile('+i+');">Выбрать</button></td></tr>');
-		});
-	}
-}
-
-function choosediffile(id) {
-	engine.server.index.deselect();
-	engine.swarm.downloaded = 0;
-	engine.files[id].select();
-	engine.server.index = engine.files[id];
-	VLC_HREF='http://localhost:'+engine.server.address().port+'/'+id;
-	EXT_HREF='http://'+address()+':'+engine.server.address().port+'/'+id;
-	//$('#switchFileModal').modal('hide');
 }
 
 function statHandler(data) {
