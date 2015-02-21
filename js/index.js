@@ -98,7 +98,7 @@ function switchChooseLoad() {
 }
 starter.on('stat', function(data) {
 	$("#magnetstat").hide();
-	$("#statswitch").show();
+	$("#stattbody").show();
 	if(!sorted && engine.files.length > 1) {
 		sorted = true;
 		if (engine.files[1].length / engine.files[0].length > 0.5) {
