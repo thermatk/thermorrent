@@ -3,6 +3,7 @@ var path = require('path');
 
 var player;
 var VLC_HREF;
+var EXT_HREF;
 
 function startvlc(href, subtitle) {
 	var VLC_ARGS = '-q --video-on-top --play-and-exit';
@@ -30,6 +31,6 @@ function startvlc(href, subtitle) {
 			player=proc.execFile(vlcPath, VLC_ARGS);
 		}
 	} else {
-		player=proc.exec('vlc '+href+' '+VLC_ARGS+' || /Applications/VLC.app/Contents/MacOS/VLC '+href+' '+VLC_ARGS);
+		player=proc.exec('vlc '+VLC_ARGS+' '+href+' || /Applications/VLC.app/Contents/MacOS/VLC '+VLC_ARGS+' '+href);
 	}
 }
