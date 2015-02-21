@@ -13,7 +13,7 @@ var starter = new events.EventEmitter();
 
 onload = function() {
 	if(gui.App.argv[0] && (/torrent/.test(gui.App.argv[0]) || /^magnet:/.test(gui.App.argv[0]))) {
-		opentorrent(gui.App.argv[0]);
+		opentorrent(gui.App.argv[0].replace(/"([^"]+)"/g, '$1'));
 		gui.App.argv[0]="0";
 	}
   	win.show();
@@ -74,14 +74,22 @@ gui.App.on('open', function(path) {
 	if(enginestarted) {
 		$("#NewPath").val(path);
 		$('#switchTorrentModal').modal('show');
-	} else {
-		gui.App.argv[0]=path.split(" ")[1];
+	} else {		
+		if (process.platform === 'win32') {
+			gui.App.argv[0]=path.split(" ")[2];	
+		} else {
+			gui.App.argv[0]=path.split(" ")[1];	
+		}
 		win.reload();
 	}
 });
 
 function openother() {
-	gui.App.argv[0]=$("#NewPath").val().split(" ")[1];
+	if (process.platform === 'win32') {
+		gui.App.argv[0]=$("#NewPath").val().split(" ")[2];	
+	} else {
+		gui.App.argv[0]=$("#NewPath").val().split(" ")[1];	
+	}
 	stopengine();
 }
 
