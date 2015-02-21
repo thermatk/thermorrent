@@ -18,10 +18,7 @@
 		"read-torrent": "^1.2.0",
 		"network-address": "1.0.0",
 		"windows-no-runnable": "~0.0.6",
-		"numeral": "^1.5.3",
-		"request": "2.53.0",
-		"cheerio": "0.18.0",
-		"iconv-lite": "0.4.7"
+		"numeral": "^1.5.3"
 	},
 	"devDependencies": {
 		"grunt": "0.4.5",

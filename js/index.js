@@ -26,7 +26,6 @@ document.addEventListener('keyup', function (e) {
 });
 
 function debugMode() {
-	$("#catalogue").show();
 	win.showDevTools();
 }
 function openfile() {	
