@@ -14,7 +14,7 @@
 		"position" : "mouse"
 	},
 	"dependencies": {
-		"peerflix": "^0.8.6",
+		"peerflix": "^0.25.2",
 		"read-torrent": "^1.2.0",
 		"network-address": "1.0.0",
 		"windows-no-runnable": "~0.0.6",
