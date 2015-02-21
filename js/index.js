@@ -8,6 +8,7 @@ var address = require('network-address');
 var statisticInterval;
 var playerStarted=false;
 var enginestarted=false;
+var sorted = false;
 var starter = new events.EventEmitter();
 
 onload = function() {
@@ -99,10 +100,24 @@ function switchChooseLoad() {
 starter.on('stat', function(data) {
 	$("#magnetstat").hide();
 	$("#statswitch").show();
-	if(engine.files.length > 1) {
+	if(!sorted && engine.files.length > 1) {
+		sorted = true;
 		//$("#multifilebutton").show();
-		VLC_HREF = VLC_HREF + ".m3u";
-		EXT_HREF=EXT_HREF + ".m3u";
+		if (engine.files[1].length / engine.files[0].length > 0.5) {
+			engine.files.sort( function(a, b) 
+			{
+			    var va = (a.name === null) ? "" : "" + a.name,
+				vb = (b.name === null) ? "" : "" + b.name;
+
+			    return va > vb ? 1 : ( va === vb ? 0 : -1 );
+			});
+			engine.files[0].select();
+			
+			engine.server.index.deselect();
+			engine.server.index = engine.files[0];
+			VLC_HREF = VLC_HREF + ".m3u";
+			EXT_HREF=EXT_HREF + ".m3u";
+		}
 	}
 	statisticInterval=setInterval(function() {statHandler(data); }, 500);
 });
@@ -143,8 +158,15 @@ function statHandler(data) {
 	var unchoked = engine.swarm.wires.filter(active);
 	var runtime = Math.floor((Date.now() - data.started) / 1000); // time running
 
-	var now = swarm.downloaded,
-	total = engine.server.index.length;
+	var now = swarm.downloaded;
+	var total, nameshow;
+	if(engine.files.length > 1) {
+		total = engine.torrent.length;
+		nameshow = engine.torrent.name;
+	} else {
+		total = engine.server.index.length;
+		nameshow = engine.server.index.name.split('/').pop().replace(/\{|\}/g, '');
+	}	
 
 	// EXT_HREF - address for player
 	// engine.server.index.name.split('/').pop().replace(/\{|\}/g, '') - filename that is streaming
@@ -158,7 +180,7 @@ function statHandler(data) {
 	var downpercent = now / total * 100.0;
 	$("#statfilebar").width(downpercent+"%");	
 	$("#stathref").text(EXT_HREF);
-	$("#statfilename").text(engine.server.index.name.split('/').pop().replace(/\{|\}/g, ''));
+	$("#statfilename").text(nameshow);
 	$("#statspeed").text(bytes(swarm.downloadSpeed())+'/с');
 	$("#statpeers").text(unchoked.length +'/'+wires.length);
 	wires.every(function(wire) {
