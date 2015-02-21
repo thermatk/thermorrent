@@ -17,11 +17,19 @@ function startvlc(href, subtitle) {
 		if (process.arch === 'x64') {
 			try {
 				key = registry('HKLM/Software/Wow6432Node/VideoLAN/VLC');
-			} catch (e) {}
+			} catch (e) {
+				try {
+					key = registry('HKLM/Software/VideoLAN/VLC');
+				} catch (err) {}
+			}
 		} else {
 			try {
 				key = registry('HKLM/Software/VideoLAN/VLC');
-			} catch (err) {}
+			} catch (err) {
+				try {
+					key = registry('HKLM/Software/Wow6432Node/VideoLAN/VLC');
+				} catch (e) {}
+			}
 		}
 
 		if (key) {
@@ -31,6 +39,8 @@ function startvlc(href, subtitle) {
 			player=proc.execFile(vlcPath, VLC_ARGS);
 		}
 	} else {
-		player=proc.exec('vlc '+VLC_ARGS+' '+href+' || /Applications/VLC.app/Contents/MacOS/VLC '+VLC_ARGS+' '+href);
+		var root = '/Applications/VLC.app/Contents/MacOS/VLC';
+		var home = (process.env.HOME || '') + root;
+		player=proc.exec('vlc ' + VLC_ARGS + ' ' + href + ' || ' + root + ' ' + VLC_ARGS + ' ' + href + ' || ' + home + ' ' + VLC_ARGS + ' ' + href);
 	}
 }
