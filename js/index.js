@@ -81,8 +81,8 @@ gui.App.on('open', function(path) {
 });
 
 function openother() {
-		gui.App.argv[0]=$("#NewPath").val().split(" ")[1];
-		stopengine();
+	gui.App.argv[0]=$("#NewPath").val().split(" ")[1];
+	stopengine();
 }
 
 starter.on("enginestarts", switchChooseLoad);
