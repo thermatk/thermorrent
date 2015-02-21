@@ -100,7 +100,9 @@ starter.on('stat', function(data) {
 	$("#magnetstat").hide();
 	$("#statswitch").show();
 	if(engine.files.length > 1) {
-		$("#multifilebutton").show();
+		//$("#multifilebutton").show();
+		VLC_HREF = VLC_HREF + ".m3u";
+		EXT_HREF=EXT_HREF + ".m3u";
 	}
 	statisticInterval=setInterval(function() {statHandler(data); }, 500);
 });
@@ -126,7 +128,8 @@ function choosediffile(id) {
 	engine.swarm.downloaded = 0;
 	engine.files[id].select();
 	engine.server.index = engine.files[id];
-	VLC_HREF='http://'+address()+':'+engine.server.address().port+'/'+id;
+	VLC_HREF='http://localhost:'+engine.server.address().port+'/'+id;
+	EXT_HREF='http://'+address()+':'+engine.server.address().port+'/'+id;
 	//$('#switchFileModal').modal('hide');
 }
 
@@ -143,7 +146,7 @@ function statHandler(data) {
 	var now = swarm.downloaded,
 	total = engine.server.index.length;
 
-	// VLC_HREF - address for player
+	// EXT_HREF - address for player
 	// engine.server.index.name.split('/').pop().replace(/\{|\}/g, '') - filename that is streaming
 	// bytes(swarm.downloadSpeed())+'/s' - speed
 	// +unchoked.length +'/'+wires.length+ - connected/available peers
@@ -154,7 +157,7 @@ function statHandler(data) {
 	$("#stattotalfile").text(bytes(total));
 	var downpercent = now / total * 100.0;
 	$("#statfilebar").width(downpercent+"%");	
-	$("#stathref").text(VLC_HREF);
+	$("#stathref").text(EXT_HREF);
 	$("#statfilename").text(engine.server.index.name.split('/').pop().replace(/\{|\}/g, ''));
 	$("#statspeed").text(bytes(swarm.downloadSpeed())+'/с');
 	$("#statpeers").text(unchoked.length +'/'+wires.length);
