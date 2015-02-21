@@ -11,13 +11,13 @@ function opentorrent(torrent) {
 		starter.emit("enginestarts");
 		startengine(torrent, opts);
 	} else {
-		readTorrent(torrent, function(err, torrentparsed) {
+		readTorrent(torrent, function(err, torrentparsed, raw) {
 			if (err) {
 				console.error(err.message);
 				process.exit(1);
 			}
 			starter.emit("enginestarts");
-			startengine(torrentparsed,opts);
+			startengine(raw,opts);
 		});
 	}
 }
@@ -42,7 +42,8 @@ var startengine = function(torrent, opts) {
 	};
 
 	engine.server.on('listening', function() {
-		VLC_HREF='http://'+address()+':'+engine.server.address().port+'/';
+		VLC_HREF='http://localhost:'+engine.server.address().port+'/';
+		EXT_HREF='http://'+address()+':'+engine.server.address().port+'/';
       
       	var started = Date.now(), loadedTimeout;
 
