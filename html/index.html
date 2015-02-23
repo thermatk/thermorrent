@@ -5,7 +5,6 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>thermorrent</title>
-		<link href="../bootstrap/css/bootstrap.cerulean.min.css" rel="stylesheet">
 		<link href="../css/index.css" rel="stylesheet">
 	</head>
 	<body>
@@ -27,6 +26,18 @@
 						<li><button type="button" id="frame-btn-switch" style="display: none;" onclick="stopengine();" class="btn btn-danger navbar-btn"><span class="glyphicon glyphicon-off"></span> Выключить</button></li>	
 					</ul>
 					<div class="nav navbar-nav navbar-right">
+						<button type="button" id="frame-btn-theme" class="btn btn-default btn-sm navbar-btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-gift"></span><span class="caret"></span></button>
+						  <ul class="dropdown-menu" role="menu">
+							<li><a href="#" data-theme="cerulean" class="theme-link">Cerulean</a></li>
+							<li><a href="#" data-theme="cosmo" class="theme-link">Cosmo</a></li>
+							<li><a href="#" data-theme="flatly" class="theme-link">Flatly</a></li>
+							<li><a href="#" data-theme="journal" class="theme-link">Journal</a></li>
+							<li><a href="#" data-theme="lumen" class="theme-link">Lumen</a></li>
+							<li><a href="#" data-theme="default" class="theme-link">Default</a></li>
+							<li><a href="#" data-theme="paper" class="theme-link">Paper</a></li>
+							<li><a href="#" data-theme="superhero" class="theme-link">Superhero</a></li>
+							<li><a href="#" data-theme="united" class="theme-link">United</a></li>
+						  </ul>	
 						<button type="button" id="frame-btn-min" class="btn btn-success btn-sm navbar-btn"><span class="glyphicon glyphicon-chevron-down"></span></button>
 						<button type="button" id="frame-btn-close" class="btn btn-danger btn-sm navbar-btn"><span class="glyphicon glyphicon-remove"></span></button>
 					</div>
