@@ -10,6 +10,7 @@ var playerStarted=false;
 var enginestarted=false;
 var sorted = false;
 var starter = new events.EventEmitter();
+var downloaded = false;
 
 onload = function() {
 	if(gui.App.argv[0] && (/torrent/.test(gui.App.argv[0]) || /^magnet:/.test(gui.App.argv[0]))) {
@@ -125,9 +126,16 @@ starter.on('stat', function(data) {
 			EXT_HREF=EXT_HREF + ".m3u";
 		}
 	}
+	engine.on('uninterested', function () {
+		if (!downloaded) {
+			//do when ready
+			downloaded = true;
+		}
+	});
 	statisticInterval=setInterval(function() {statHandler(data); }, 500);
 });
 
+	
 function magnetStat() {
 	$("#magnetstat").show();
 	$("#magnetstatmeta").text(engine.swarm.wires.length);
@@ -144,12 +152,12 @@ function statHandler(data) {
 	var runtime = Math.floor((Date.now() - data.started) / 1000); // time running
 
 	var now = swarm.downloaded;
-	var total, nameshow;
+	var totaltorrent = engine.torrent.length;
+	var total = engine.server.index.length;
+	var nameshow;
 	if(engine.files.length > 1) {
-		total = engine.torrent.length;
 		nameshow = engine.torrent.name;
 	} else {
-		total = engine.server.index.length;
 		nameshow = engine.server.index.name.split('/').pop().replace(/\{|\}/g, '');
 	}	
 
@@ -161,8 +169,8 @@ function statHandler(data) {
 	// +bytes(swarm.uploaded)+ - uploaded
 	// +hotswaps+ - hotswaps
 	$("#statalreadydownfile").text(bytes(now));
-	$("#stattotalfile").text(bytes(total));
-	var downpercent = now / total * 100.0;
+	$("#stattotalfile").text(bytes(totaltorrent));
+	var downpercent = now / totaltorrent * 100.0;
 	$("#statfilebar").width(downpercent+"%");	
 	$("#stathref").text(EXT_HREF);
 	$("#statfilename").text(nameshow);
